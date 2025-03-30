@@ -31,6 +31,8 @@ ModuleRegistry.registerModules([
   TextFilterModule,
   ValidationModule /* Development Only */,
 ]);
+import * as echarts from 'echarts';
+
 
 export interface IOlympicData {
     athlete: string,
@@ -64,8 +66,7 @@ export interface IOlympicData {
 })
 export class AppComponent {
   showGrid = true; // Set to false to hide the grid
-
-    columnDefs: ColDef[] = [
+     columnDefs: ColDef[] = [
       { field: "athlete", filter: "agTextColumnFilter", minWidth: 200 },
       { field: "age" },
       { field: "country", minWidth: 180 },
@@ -76,6 +77,49 @@ export class AppComponent {
       { field: "bronze" },
       { field: "total" },
     ];
+
+option2 = {
+    series: [
+      {
+        type: 'map',
+        map: 'USA'
+      }
+    ]
+  };
+  option = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line'
+      }
+    ]
+  };
+ngOnInit() {
+  const chartDom = document.getElementById('main');
+  console.log(chartDom)
+  if (chartDom) {
+    const myChart = echarts.init(chartDom);
+    this.http
+                    .get<any>(
+                      '/echarts-api/examples/data/asset/geo/world.json'
+                    )
+                    .subscribe((data) => {this.rowData2 = data;
+                      echarts.registerMap('USA', data);
+
+
+    myChart.setOption(this.option2)
+
+                      });
+  }
+
+}
     defaultColDef: ColDef = {
       flex: 1,
       minWidth: 100,
@@ -105,6 +149,8 @@ export class AppComponent {
       defaultToolPanel: "filters",
     };
 
+  rowData2!: any[];
+
     constructor(private http: HttpClient) {}
 
     onGridReady(params: GridReadyEvent<IOlympicData>) {
@@ -112,6 +158,9 @@ export class AppComponent {
         .get<IOlympicData[]>(
           "https://www.ag-grid.com/example-assets/olympic-winners.json"
         )
-        .subscribe((data) => {console.log(data);this.rowData = data});
+        .subscribe((data) => {this.rowData = data});
+
+
+
     }
 }

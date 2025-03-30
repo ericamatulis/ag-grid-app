@@ -21,7 +21,7 @@ import {
   ɵɵdirectiveInject,
   ɵɵgetInheritedFactory,
   ɵɵinject
-} from "./chunk-ULLLBF5Y.js";
+} from "./chunk-34SUHHMJ.js";
 import {
   BaseComponentWrapper,
   VanillaFrameworkOverrides,
@@ -30,8 +30,8 @@ import {
   _processOnChange,
   _removeFromParent,
   createGrid
-} from "./chunk-AQWG26CR.js";
-import "./chunk-WDMUDEB6.js";
+} from "./chunk-OBXXAODN.js";
+import "./chunk-XWLXMCJQ.js";
 
 // node_modules/ag-grid-angular/fesm2022/ag-grid-angular.mjs
 var AgComponentContainer = class _AgComponentContainer {

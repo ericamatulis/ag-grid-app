@@ -1,0 +1,10 @@
+{
+  "/echarts-api": {
+    "target": "https://echarts.apache.org",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/echarts-api": ""
+    }
+  }
+}
